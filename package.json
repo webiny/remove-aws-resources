@@ -1,0 +1,63 @@
+{
+    "name": "remove-aws-resources",
+    "version": "0.0.0-development",
+    "description": "Cleanup your AWS account using intuitive and extendable CLI tool",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/webiny/remove-aws-resources.git"
+    },
+    "author": "Webiny Ltd.",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/webiny/remove-aws-resources/issues"
+    },
+    "keywords": [
+        "aws",
+        "remove",
+        "infrastructure"
+    ],
+    "homepage": "https://github.com/webiny/remove-aws-resources#readme",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "bin": {
+        "remove-aws-resources": "dist/index.js"
+    },
+    "lint-staged": {
+        "**/*.js": [
+            "prettier --write",
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.10.1",
+        "@babel/core": "^7.10.2",
+        "@babel/preset-env": "^7.10.2",
+        "@babel/preset-typescript": "^7.10.1",
+        "adio": "^1.1.1",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.9",
+        "prettier": "^2.0.5",
+        "rimraf": "^3.0.2",
+        "semantic-release": "^17.0.8",
+        "typescript": "^3.9.5"
+    },
+    "scripts": {
+        "build": "rimraf ./dist *.tsbuildinfo && babel src -d dist --source-maps --copy-files --extensions \".ts\"",
+        "watch": "babel src -d dist --source-maps --copy-files --extensions \".ts\" --watch",
+        "postbuild": "cp package.json LICENSE README.md dist/ && tsc -p tsconfig.json"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.701.0",
+        "chalk": "^4.1.0",
+        "inquirer": "^7.2.0",
+        "inquirer-checkbox-plus-prompt": "^1.0.1",
+        "listr": "^0.14.3",
+        "rxjs": "^6.5.5",
+        "p-retry": "^4.2.0"
+    }
+}
